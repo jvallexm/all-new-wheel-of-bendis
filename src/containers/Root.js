@@ -2,6 +2,8 @@ import React from 'react';
 import io from 'socket.io-client';
 const socket=io();
 import EventView from './EventView.js';
+import FacebookLogin from 'react-facebook-login';
+import CharEdit from './CharEdit.js';
 
 export default class App extends React.Component
 {
@@ -10,10 +12,16 @@ export default class App extends React.Component
         super(props);
         this.state = {
             characters: [],
-            teams: ["Runaways","S.H.I.E.L.D.","Guardians of the Galaxy","Champions","Defenders","Inhumans","Young Avengers","Secret Avengers","Avengers","X-Men","X-Force","X-Factor","X-Statix","Avengers","Alpha Flight","S.H.I.E.L.D","Brotherhood of Evil Mutants","Sinister Six","Marvel Knights","Dark X-Men","Fantastic Four","Excalibur","Agents of Atlas","Heroes For Hire","Howling Commandos","West Cost Avengers","Freedom Force","Midnight Sons","Nextwave","Power Pack","New Mutants","Thunderbolts","Mauraders","Illuminati","Future Foundation","Invaders"]
+            teams: ["Runaways","S.H.I.E.L.D.","Guardians of the Galaxy","Champions","Defenders","Inhumans","Young Avengers","Secret Avengers","Avengers","X-Men","X-Force","X-Factor","X-Statix","Avengers","Alpha Flight","Brotherhood of Evil Mutants","Sinister Six","Marvel Knights","Dark X-Men","Fantastic Four","Excalibur","Agents of Atlas","Heroes For Hire","Howling Commandos","West Cost Avengers","Freedom Force","Midnight Sons","Nextwave","Power Pack","New Mutants","Thunderbolts","Mauraders","Illuminati","Future Foundation","Invaders"],
+            grayOut: false,
+            loggedIn: false,
+            user: undefined,
+            which: -1
         };
+        this.responseFacebook = this.responseFacebook.bind(this);
         this.sendCharacters = this.sendCharacters.bind(this);
         this.sendTeams = this.sendTeams.bind(this);
+        this.nextOne = this.nextOne.bind(this);
     }
     componentWillMount()
     {
@@ -21,8 +29,29 @@ export default class App extends React.Component
             socket.emit("send me characters",{send: "characters"});
         socket.on("get characters",(data)=>{
             console.log("got characters from database");
-            this.setState({characters: data.characters});
+            let count = 0;
+            let check = false;
+            while(!check && count<data.characters.length)
+            {
+                if(Object.keys(data.characters[count]).indexOf("last_updated") == -1)
+                {
+                    check = true;
+                }
+                else
+                    count++;
+            }
+            this.setState({characters: data.characters, which: count});
         });      
+    }
+    nextOne()
+    {
+        this.setState({which: this.state.which + 1});
+    }
+    responseFacebook(response)
+    {
+      //console.log(JSON.stringify(response));
+      //console.log("userid: " + response.userID);
+      this.setState({user: response, loggedIn: true});
     }
     sendCharacters(num,team,min)
     {
@@ -70,13 +99,28 @@ export default class App extends React.Component
     {
         return(
             <div id="whole-app">
+              {this.state.grayOut ?
+              <div className="gray-out middle-text text-center container-fluid">
+              </div> 
+              :""}
+              
               <div className="text-center container-fluid"> 
                   <h1 className="white-text">MARVEL Event Generator!</h1>
                   <div className="text-center container-fluid app">
                   
-                          <div className="text-center off-top container-fluid">
-
-                          </div>
+                          {/*<div className="text-center off-top container-fluid">
+                            <button className="btn tab tab-off">Character Search</button>
+                            {this.state.loggedIn
+                            ?<button className="btn tab tab-off">Character Editor</button>
+                            :   <FacebookLogin 
+                                  cssClass="btn tab tab-off"
+                                  appId="1586281238109787"
+                                  autoLoad={true}
+                                  fields="name,picture"
+                                  callback={this.responseFacebook}
+                                  onClick={()=>console.log("logging in...")}
+                                 /> }
+                          </div>*/}
                           
                           <div>
                                 {this.state.characters.length > 0 ?

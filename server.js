@@ -36,12 +36,35 @@ io.on('connection', (socket) => {
                                     });
                                     db.close();
                                 }
-                             })
+                             });
                };
                getAll(db);
            }
         });
     });
-    
+    socket.on("update one",(data)=>{
+        MongoClient.connect(url, (err,db)=>{
+           if(err)
+            console.log(err);
+           else
+           {
+               var characters = db.collection('characters');
+               var updateOne = ()=> {
+                   var now = Math.round((new Date()).getTime()/1000);
+                   console.log("Updating: " + data.character.name);
+                   characters.insert({
+                       _id: data.character._id,
+                       name: data.character.name,
+                       teams: data.character.teams,
+                       disambiguation: data.character.disambiguation,
+                       list: data.character.list,
+                       isHero: data.character.isHero,
+                       last_updated: now
+                   });
+               };
+               updateOne(db,()=>{db.close();});
+           }
+        });
+    })
 });
     
