@@ -16839,6 +16839,14 @@ var App = function (_React$Component) {
                             this.state.characters.length > 0 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__EventView_js__["a" /* default */], { newCharacters: this.sendCharacters,
                                 newTeams: this.sendTeams }) : ""
                         )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'smol',
+                            onClick: function onClick() {
+                                return window.open('https://github.com/jvallexm/all-new-wheel-of-bendis');
+                            } },
+                        'Jennifer Valle Made This in 2017!'
                     )
                 )
             );
@@ -17095,17 +17103,9 @@ var AgeOf = function (_React$Component) {
           null,
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'strong',
-            null,
-            'Age of '
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'strong',
             { className: 'red-one' },
-            this.state.characters[0].name.indexOf("(") == -1 ? this.state.characters[0].name : this.state.characters[0].name.substr(0, this.state.characters[0].name.indexOf("(") - 1)
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'strong',
-            null,
+            'Age of ',
+            this.state.characters[0].name.indexOf("(") == -1 ? this.state.characters[0].name : this.state.characters[0].name.substr(0, this.state.characters[0].name.indexOf("(") - 1),
             '!'
           )
         ),

@@ -130,7 +130,8 @@ export default class App extends React.Component
                           </div>
                   
                   </div>
-
+                <div className="smol"
+                      onClick={()=>window.open('https://github.com/jvallexm/all-new-wheel-of-bendis')}>Jennifer Valle Made This in 2017!</div>
               </div>
             </div>
         );

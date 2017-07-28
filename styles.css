@@ -305,3 +305,8 @@ input
   min-height: 600px;
   box-shadow: 5px 5px 5px black;
 }
+.smol{
+  font-size: 75%;
+  color:white;
+  margin-top: 25px;
+}
