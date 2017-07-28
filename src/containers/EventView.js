@@ -2,6 +2,7 @@ import React from 'react';
 import AoA from './events/AoA.js';
 import YvZ from './events/YvZ.js';
 import Maximum from './events/Maximum.js';
+import Secret from './events/Secret.js';
 
 export default class EventView extends React.Component
 {
@@ -12,7 +13,7 @@ export default class EventView extends React.Component
             view: -1,
             ticks: 0,
             eventClass: "",
-            events: ["YvZ","AoA","Max"]
+            events: ["YvZ","AoA","Max","MSSW"]
         };
         this.shuffle = this.shuffle.bind(this);
     }
@@ -26,7 +27,9 @@ export default class EventView extends React.Component
         if(this.state.view==1)
             eventClass = "event-aoa";
         if(this.state.view==2)
-            eventClass = "event-maximum"
+            eventClass = "event-maximum";
+        if(this.state.view==3)
+            eventClass = "event-secret-wars";
         this.setState({eventClass: eventClass});    
     }
     shuffle()
@@ -37,7 +40,9 @@ export default class EventView extends React.Component
         if(roll==1)
             eventClass = "event-aoa";
         if(roll==2)
-            eventClass = "event-maximum"    
+            eventClass = "event-maximum" 
+        if(roll==3)
+            eventClass = "event-secret-wars";
         this.setState({view: roll, eventClass: eventClass, ticks: this.state.ticks + 1});
     }
     render()
@@ -56,10 +61,15 @@ export default class EventView extends React.Component
                              newTeams={this.props.newTeams} 
                              tick={this.state.ticks}
                              shuffle={this.shuffle}/>         
-                      : <Maximum newCharacters={this.props.newCharacters} 
+                      :this.state.view==2
+                      ? <Maximum newCharacters={this.props.newCharacters} 
                              newTeams={this.props.newTeams} 
                              tick={this.state.ticks}
-                             shuffle={this.shuffle} />    
+                             shuffle={this.shuffle} />  
+                      : <Secret newCharacters={this.props.newCharacters} 
+                             newTeams={this.props.newTeams} 
+                             tick={this.state.ticks}
+                             shuffle={this.shuffle} />              
                       }         
 
                 </div>        
