@@ -8,31 +8,49 @@ export default class EventView extends React.Component
     {
         super(props);
         this.state = {
-            view: 0,
+            view: -1,
             ticks: 0,
-            eventClass: "event-avx"
+            eventClass: "",
+            events: ["YvZ","AoA"]
         };
         this.shuffle = this.shuffle.bind(this);
     }
     componentWillMount()
     {
-        this.shuffle;
+        this.shuffle();
+    }
+    componentDidMount()
+    {
+        let eventClass = "event-avx";
+        if(this.state.view==1)
+            eventClass = "event-aoa"; 
+        this.setState({eventClass: eventClass});    
     }
     shuffle()
     {
-        let roll = Math.floor(Math.random*5);
-        let eventClass = 'event-avx';
-        
-        
-        this.setState({view: roll, eventClass: eventClass});
+        let roll = Math.floor(Math.random()*this.state.events.length);
+        //console.log("new roll: " + roll);
+        let eventClass = "event-avx";
+        if(roll==1)
+            eventClass = "event-aoa";
+        this.setState({view: roll, eventClass: eventClass, ticks: this.state.ticks + 1});
     }
     render()
     {
         return(
              <div className={this.state.eventClass}>
                   <div id="words" className="inside-event middle-text">
-                        <AoA newCharacters={this.props.newCharacters} 
-                                 newTeams={this.props.newTeams} />
+                      {
+                        this.state.view == 0    
+                      ? <YvZ newCharacters={this.props.newCharacters} 
+                             newTeams={this.props.newTeams} 
+                             tick={this.state.ticks}
+                             shuffle={this.shuffle}/>     
+                      : <AoA newCharacters={this.props.newCharacters} 
+                             newTeams={this.props.newTeams} 
+                             tick={this.state.ticks}
+                             shuffle={this.shuffle}/>         
+                      }         
 
                 </div>        
             </div>

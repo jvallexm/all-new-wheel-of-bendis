@@ -16343,9 +16343,10 @@ var EventView = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (EventView.__proto__ || Object.getPrototypeOf(EventView)).call(this, props));
 
         _this.state = {
-            view: 0,
+            view: -1,
             ticks: 0,
-            eventClass: "event-avx"
+            eventClass: "",
+            events: ["YvZ", "AoA"]
         };
         _this.shuffle = _this.shuffle.bind(_this);
         return _this;
@@ -16354,15 +16355,23 @@ var EventView = function (_React$Component) {
     _createClass(EventView, [{
         key: 'componentWillMount',
         value: function componentWillMount() {
-            this.shuffle;
+            this.shuffle();
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var eventClass = "event-avx";
+            if (this.state.view == 1) eventClass = "event-aoa";
+            this.setState({ eventClass: eventClass });
         }
     }, {
         key: 'shuffle',
         value: function shuffle() {
-            var roll = Math.floor(Math.random * 5);
-            var eventClass = 'event-avx';
-
-            this.setState({ view: roll, eventClass: eventClass });
+            var roll = Math.floor(Math.random() * this.state.events.length);
+            //console.log("new roll: " + roll);
+            var eventClass = "event-avx";
+            if (roll == 1) eventClass = "event-aoa";
+            this.setState({ view: roll, eventClass: eventClass, ticks: this.state.ticks + 1 });
         }
     }, {
         key: 'render',
@@ -16373,8 +16382,13 @@ var EventView = function (_React$Component) {
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
                     { id: 'words', className: 'inside-event middle-text' },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__events_AoA_js__["a" /* default */], { newCharacters: this.props.newCharacters,
-                        newTeams: this.props.newTeams })
+                    this.state.view == 0 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__events_YvZ_js__["a" /* default */], { newCharacters: this.props.newCharacters,
+                        newTeams: this.props.newTeams,
+                        tick: this.state.ticks,
+                        shuffle: this.shuffle }) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__events_AoA_js__["a" /* default */], { newCharacters: this.props.newCharacters,
+                        newTeams: this.props.newTeams,
+                        tick: this.state.ticks,
+                        shuffle: this.shuffle })
                 )
             );
         }
@@ -16574,8 +16588,15 @@ var AoA = function (_React$Component) {
   _createClass(AoA, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      console.log("YvZ will mount");
+      //console.log("AoA will mount");
       this.shuffle();
+    }
+  }, {
+    key: 'componentWillUpdate',
+    value: function componentWillUpdate(prevProps) {
+      if (prevProps.tick != this.props.tick) {
+        this.shuffle();
+      }
     }
   }, {
     key: 'shuffle',
@@ -16664,7 +16685,7 @@ var AoA = function (_React$Component) {
             ' and explains how the world went wrong, these embittered heroes and their tenuous allies must risk everything - and undertake a dangerous and multi-pronged quest - to put things right!'
           )
         ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Buttons_js__["a" /* default */], { shuffle: this.shuffle })
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Buttons_js__["a" /* default */], { shuffle: this.props.shuffle })
       );
     }
   }]);
@@ -16726,8 +16747,15 @@ var YvZ = function (_React$Component) {
   _createClass(YvZ, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      console.log("YvZ will mount");
+      //console.log("YvZ will mount");
       this.shuffle();
+    }
+  }, {
+    key: 'componentWillUpdate',
+    value: function componentWillUpdate(prevProps) {
+      if (prevProps.tick != this.props.tick) {
+        this.shuffle();
+      }
     }
   }, {
     key: 'shuffle',
@@ -16867,7 +16895,7 @@ var YvZ = function (_React$Component) {
             )
           )
         ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Buttons_js__["a" /* default */], { shuffle: this.shuffle })
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Buttons_js__["a" /* default */], { shuffle: this.props.shuffle })
       );
     }
   }]);
@@ -16876,7 +16904,7 @@ var YvZ = function (_React$Component) {
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
 var _default = YvZ;
-/* unused harmony default export */ var _unused_webpack_default_export = _default;
+/* harmony default export */ __webpack_exports__["a"] = _default;
 ;
 
 var _temp = function () {

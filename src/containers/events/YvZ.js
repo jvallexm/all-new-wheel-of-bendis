@@ -14,8 +14,15 @@ export default class YvZ extends React.Component
   }
   componentWillMount()
   {
-      console.log("YvZ will mount");
+      //console.log("YvZ will mount");
       this.shuffle();
+  }
+  componentWillUpdate(prevProps)
+  {
+    if(prevProps.tick != this.props.tick)
+    {
+      this.shuffle();
+    }
   }
   shuffle()
   {
@@ -53,7 +60,7 @@ export default class YvZ extends React.Component
                   <h4>And more! It's Marvel's biggest event ever - but will the <strong className="red-one">{this.state.teams[0]}</strong> or the <strong className="blue-one">{this.state.teams[1]}</strong> emerge triumphant?</h4>
                 </div> 
         </div>
-        <Buttons shuffle={this.shuffle} />
+        <Buttons shuffle={this.props.shuffle} />
       </div>
     );
   }
