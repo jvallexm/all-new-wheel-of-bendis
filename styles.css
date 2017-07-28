@@ -57,7 +57,7 @@ body
 .event{
   background-image: url('https://i.annihil.us/u/prod/marvel/i/mg/d/90/4f7dc878b57fe/detail.jpg');
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: absolute;
   background-size: 825px 1252px;
   background-position: 50% calc(50% - 75px);
   font-weight: bold;
@@ -69,7 +69,7 @@ body
 .event-ig{
   background-image: url('https://i.annihil.us/u/prod/marvel/i/mg/e/a0/4bc65a5cab4a4/detail.jpg');
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: absolute;
   background-size: 825px 1252px;
   background-position: 50% calc(50% - 200px);
   font-weight: bold;
@@ -81,7 +81,7 @@ body
 .event-maximum{
   background-image: url('https://i.annihil.us/u/prod/marvel/i/mg/f/b0/51dd882faec6e/detail.jpg');
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: absolute;
   background-size: 825px 1252px;
   background-position: 50% calc(50%);
   font-weight: bold;
@@ -92,7 +92,7 @@ body
 }
 .event-aoa{
   background-image: url('https://i.annihil.us/u/prod/marvel/i/mg/c/d0/4ec2b3fd596b9/detail.jpg');
-  background-attachment: fixed;
+  background-attachment: absolute;
   background-size: 1010px 1578px;
   background-position: 50% calc(50% - 75px);
   font-weight: bold;
@@ -104,7 +104,7 @@ body
 .event-avx{
   background-image: url('https://i.annihil.us/u/prod/marvel/i/mg/d/90/4f7dc878b57fe/detail.jpg');
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: absolute;
   background-size: 825px 1252px;
   background-position: 50% calc(50% - 75px);
   font-weight: bold;
@@ -116,7 +116,7 @@ body
 .event-civil-war{
   background-image: url('https://i.annihil.us/u/prod/marvel/i/mg/c/40/4bc5e6c93a70c/detail.jpg');
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: absolute;
   background-size: 825px 1252px;
   background-position: 50% calc(50% - 30px);
   font-weight: bold;
@@ -128,7 +128,7 @@ body
 .event-secret-wars{
   background-image: url('https://i.annihil.us/u/prod/marvel/i/mg/d/03/5757174e3255d/detail.jpg');
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: absolute;
   background-size: 825px 1252px;
   background-position: 50% calc(50% - 30px);
   font-weight: bold;
@@ -272,7 +272,7 @@ input
 .event-axis{
   background-image: url('https://i.annihil.us/u/prod/marvel/i/mg/5/f0/544ea231a1b89/detail.jpg');
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: absolute;
   background-size: 825px 1252px;
   background-position: 50% calc(50% + 35px);
   font-weight: bold;
@@ -284,7 +284,7 @@ input
 .event-island{
   background-image: url('https://i.annihil.us/u/prod/marvel/i/mg/7/20/57eab84d99434/detail.jpg');
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: absolute;
   background-size: 825px 1252px;
   background-position: 50% calc(50% + 55px);
   font-weight: bold;
@@ -296,7 +296,7 @@ input
 .event-aou{
   background-image: url('https://i.annihil.us/u/prod/marvel/i/mg/c/d0/51ed8cf71fd82/detail.jpg');
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: absolute;
   background-size: 825px 1252px;
   background-position: 50% calc(50% + 80px);
   font-weight: bold;
