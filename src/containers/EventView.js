@@ -3,6 +3,8 @@ import AoA from './events/AoA.js';
 import YvZ from './events/YvZ.js';
 import Maximum from './events/Maximum.js';
 import Secret from './events/Secret.js';
+import Ig from './events/Ig.js';
+
 
 export default class EventView extends React.Component
 {
@@ -13,7 +15,7 @@ export default class EventView extends React.Component
             view: -1,
             ticks: 0,
             eventClass: "",
-            events: ["YvZ","AoA","Max","MSSW"]
+            events: ["YvZ","AoA","Max","MSSW","Ig"]
         };
         this.shuffle = this.shuffle.bind(this);
     }
@@ -30,6 +32,8 @@ export default class EventView extends React.Component
             eventClass = "event-maximum";
         if(this.state.view==3)
             eventClass = "event-secret-wars";
+        if(this.state.view==4)
+            eventClass = "event-ig";
         this.setState({eventClass: eventClass});    
     }
     shuffle()
@@ -43,6 +47,8 @@ export default class EventView extends React.Component
             eventClass = "event-maximum" 
         if(roll==3)
             eventClass = "event-secret-wars";
+        if(roll==4)
+            eventClass = "event-ig";
         this.setState({view: roll, eventClass: eventClass, ticks: this.state.ticks + 1});
     }
     render()
@@ -66,10 +72,15 @@ export default class EventView extends React.Component
                              newTeams={this.props.newTeams} 
                              tick={this.state.ticks}
                              shuffle={this.shuffle} />  
-                      : <Secret newCharacters={this.props.newCharacters} 
+                      :this.state.view==3
+                      ? <Secret newCharacters={this.props.newCharacters} 
                              newTeams={this.props.newTeams} 
                              tick={this.state.ticks}
-                             shuffle={this.shuffle} />              
+                             shuffle={this.shuffle} />     
+                      : <Ig newCharacters={this.props.newCharacters} 
+                             newTeams={this.props.newTeams} 
+                             tick={this.state.ticks}
+                             shuffle={this.shuffle} />            
                       }         
 
                 </div>        
