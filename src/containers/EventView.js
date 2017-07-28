@@ -1,6 +1,7 @@
 import React from 'react';
 import AoA from './events/AoA.js';
 import YvZ from './events/YvZ.js';
+import Maximum from './events/Maximum.js';
 
 export default class EventView extends React.Component
 {
@@ -11,7 +12,7 @@ export default class EventView extends React.Component
             view: -1,
             ticks: 0,
             eventClass: "",
-            events: ["YvZ","AoA"]
+            events: ["YvZ","AoA","Max"]
         };
         this.shuffle = this.shuffle.bind(this);
     }
@@ -23,7 +24,9 @@ export default class EventView extends React.Component
     {
         let eventClass = "event-avx";
         if(this.state.view==1)
-            eventClass = "event-aoa"; 
+            eventClass = "event-aoa";
+        if(this.state.view==2)
+            eventClass = "event-maximum"
         this.setState({eventClass: eventClass});    
     }
     shuffle()
@@ -33,6 +36,8 @@ export default class EventView extends React.Component
         let eventClass = "event-avx";
         if(roll==1)
             eventClass = "event-aoa";
+        if(roll==2)
+            eventClass = "event-maximum"    
         this.setState({view: roll, eventClass: eventClass, ticks: this.state.ticks + 1});
     }
     render()
@@ -46,10 +51,15 @@ export default class EventView extends React.Component
                              newTeams={this.props.newTeams} 
                              tick={this.state.ticks}
                              shuffle={this.shuffle}/>     
-                      : <AoA newCharacters={this.props.newCharacters} 
+                      :this.state.view == 1 
+                      ? <AoA newCharacters={this.props.newCharacters} 
                              newTeams={this.props.newTeams} 
                              tick={this.state.ticks}
                              shuffle={this.shuffle}/>         
+                      : <Maximum newCharacters={this.props.newCharacters} 
+                             newTeams={this.props.newTeams} 
+                             tick={this.state.ticks}
+                             shuffle={this.shuffle} />    
                       }         
 
                 </div>        
