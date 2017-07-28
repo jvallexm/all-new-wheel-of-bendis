@@ -269,3 +269,39 @@ input
   text-align: right;
   padding: 5px;
 }
+.event-axis{
+  background-image: url('https://i.annihil.us/u/prod/marvel/i/mg/5/f0/544ea231a1b89/detail.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 825px 1252px;
+  background-position: 50% calc(50% + 35px);
+  font-weight: bold;
+  padding: 20px;
+  border-radius: 20px;
+  min-height: 600px;
+  box-shadow: 5px 5px 5px black;
+}
+.event-island{
+  background-image: url('https://i.annihil.us/u/prod/marvel/i/mg/7/20/57eab84d99434/detail.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 825px 1252px;
+  background-position: 50% calc(50% + 55px);
+  font-weight: bold;
+  padding: 20px;
+  border-radius: 20px;
+  min-height: 600px;
+  box-shadow: 5px 5px 5px black;
+}
+.event-aou{
+  background-image: url('https://i.annihil.us/u/prod/marvel/i/mg/c/d0/51ed8cf71fd82/detail.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 825px 1252px;
+  background-position: 50% calc(50% + 80px);
+  font-weight: bold;
+  padding: 20px;
+  border-radius: 20px;
+  min-height: 600px;
+  box-shadow: 5px 5px 5px black;
+}

@@ -40,7 +40,7 @@ export default class AoA extends React.Component
         
         <h4>Marvel Comics Presents...</h4>
         
-        <h1><strong className="red-one">Age of {this.state.characters[0].name}!</strong></h1>
+        <h1><strong className="red-one">Age of {this.state.characters[0].name.indexOf("(") == -1 ? this.state.characters[0].name : this.state.characters[0].name.substr(0,this.state.characters[0].name.indexOf("(")-1)}!</strong></h1>
         
         <div className="solicit text-center container-fluid">
 
