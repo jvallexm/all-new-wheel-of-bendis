@@ -7,7 +7,6 @@ export default class Buttons extends React.Component
     return(
          <div className="buttons">
                 <button className="btn btn-red" onClick={this.props.shuffle}>Again!</button>
-                <button className="btn btn-red"><i className="fa fa-facebook" /></button>
          </div>
          );
   }         

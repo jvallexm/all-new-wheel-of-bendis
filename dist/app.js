@@ -1988,11 +1988,6 @@ var Buttons = function (_React$Component) {
           "button",
           { className: "btn btn-red", onClick: this.props.shuffle },
           "Again!"
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          "button",
-          { className: "btn btn-red" },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fa fa-facebook" })
         )
       );
     }
