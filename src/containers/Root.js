@@ -2,8 +2,8 @@ import React from 'react';
 import io from 'socket.io-client';
 const socket=io();
 import EventView from './EventView.js';
-import FacebookLogin from 'react-facebook-login';
-import CharEdit from './CharEdit.js';
+//import FacebookLogin from 'react-facebook-login';
+//import CharEdit from './CharEdit.js';
 
 export default class App extends React.Component
 {
@@ -16,17 +16,22 @@ export default class App extends React.Component
             grayOut: false,
             loggedIn: false,
             user: undefined,
-            which: -1
+            which: -1,
+            spins: -1
         };
         this.responseFacebook = this.responseFacebook.bind(this);
         this.sendCharacters = this.sendCharacters.bind(this);
         this.sendTeams = this.sendTeams.bind(this);
         this.nextOne = this.nextOne.bind(this);
+        this.addSpin = this.addSpin.bind(this);
     }
     componentWillMount()
     {
         if(this.state.characters.length == 0)
+        {
             socket.emit("send me characters",{send: "characters"});
+            socket.emit("send me spins",{send: "spins"});
+        }    
         socket.on("get characters",(data)=>{
             console.log("got characters from database");
             let count = 0;
@@ -41,7 +46,18 @@ export default class App extends React.Component
                     count++;
             }
             this.setState({characters: data.characters, which: count});
-        });      
+        }); 
+        socket.on("get spins",(data)=>{
+           this.setState({spins: data.spins}); 
+        });
+        socket.on("new spin",()=>{
+            this.setState({spins: this.state.spins + 1});
+        });
+    }
+    addSpin()
+    {
+        socket.emit("add a spin");
+        this.setState({spins: this.state.spins + 1});
     }
     nextOne()
     {
@@ -103,7 +119,6 @@ export default class App extends React.Component
               <div className="gray-out middle-text text-center container-fluid">
               </div> 
               :""}
-              
               <div className="text-center container-fluid"> 
                   <h1 className="white-text">MARVEL Event Generator!</h1>
                   <div className="text-center container-fluid app">
@@ -125,11 +140,29 @@ export default class App extends React.Component
                           <div>
                                 {this.state.characters.length > 0 ?
                                 <EventView newCharacters={this.sendCharacters}
-                                           newTeams={this.sendTeams}/>
+                                           newTeams={this.sendTeams}
+                                           spin={this.addSpin}/>
                                 : ""}
                           </div>
                   
                   </div>
+                  {this.state.spins > -1 ?
+                  <div className="spinner">
+                  <span>Wheel Spins Since 7/29/17: {  
+                             this.state.spins<100 
+                           ? ["0","0","0","0"].map((d,i)=> <span className="counter" key={"z"+d+i} >{d}</span> ) 
+                           : this.state.spins<1000 
+                           ? ["0","0","0"].map((d,i)=> <span className="counter" key={"z"+d+i} >{d}</span> )
+                           : this.state.spins<10000
+                           ? ["0","0"].map((d,i)=> <span className="counter" key={"z"+d+i} >{d}</span> )
+                           : this.state.spins<100000
+                           ? <span className="counter">0</span>
+                           : ""  }
+                          {this.state.spins.toString().split("").map((d,i)=>
+                            <span key={d+i}className="counter">{d}</span>)
+                          }
+                  </span>
+                  </div> : ""}
                 <div className="smol"
                       onClick={()=>window.open('https://github.com/jvallexm/all-new-wheel-of-bendis')}>Jennifer Valle Made This in 2017!</div>
               </div>

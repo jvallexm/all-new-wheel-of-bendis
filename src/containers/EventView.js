@@ -44,7 +44,7 @@ export default class EventView extends React.Component
         if(this.state.view==7)
             eventClass = "event-island";
         if(this.state.view==8)
-            eventClass = "event-aou";    
+            eventClass = "event-aou";   
         this.setState({eventClass: eventClass});    
     }
     shuffle()
@@ -68,6 +68,7 @@ export default class EventView extends React.Component
             eventClass = "event-island";
         if(roll==8)
             eventClass = "event-aou";    
+        this.props.spin();    
         this.setState({view: roll, eventClass: eventClass, ticks: this.state.ticks + 1});
     }
     render()

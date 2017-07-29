@@ -65,6 +65,45 @@ io.on('connection', (socket) => {
                updateOne(db,()=>{db.close();});
            }
         });
-    })
+    });
+    socket.on("send me spins",()=>{
+       MongoClient.connect(url,(err,db)=>{
+          if(err)
+            console.log(err);
+          else{
+              var spins = db.collection('count');
+              var findOne = () =>{
+                spins.find({},{})
+                     .toArray((err,data)=>{
+                        if(err)
+                          console.log(err);
+                        else
+                        {
+                            socket.emit("get spins",{spins: data[0].spins});
+                            db.close();
+                        }
+                     });
+              };
+              findOne(db);
+          }     
+       }); 
+    });
+    socket.on("add a spin",()=>{
+       socket.broadcast.emit("new spin",{}); 
+       MongoClient.connect(url,(err,db)=>{
+          if(err)
+            console.log(err);
+          else
+          {
+              var spins = db.collection('count');
+              var update = () =>{
+                spins.update({_id: "spins"},{
+                   $inc: {spins: 1}    
+                }); 
+              };
+              update(db,()=>{db.close();});
+          }
+       });
+    });
 });
     

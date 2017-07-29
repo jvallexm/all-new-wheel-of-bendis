@@ -308,5 +308,23 @@ input
 .smol{
   font-size: 75%;
   color:white;
-  margin-top: 25px;
+  margin-top: 10px;
+}
+.counter
+{
+  background-color: black;
+  color: white;
+  width: 24px;
+  margin: 1px;
+  padding: 4px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  text-align: center;
+  border-radius: 3px;
+}
+.spinner
+{
+  color: white;
+  margin-top: 23px;
+  font-family: "Oswald";
 }
