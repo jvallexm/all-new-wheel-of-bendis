@@ -274,7 +274,7 @@ input
   background-repeat: no-repeat;
   background-attachment: absolute;
   background-size: 825px 1252px;
-  background-position: 50% calc(50% + 35px);
+  background-position: 50% calc(50% + 15px);
   font-weight: bold;
   padding: 20px;
   border-radius: 20px;
@@ -298,7 +298,7 @@ input
   background-repeat: no-repeat;
   background-attachment: absolute;
   background-size: 825px 1252px;
-  background-position: 50% calc(50% + 80px);
+  background-position: 50% calc(50% + 60px);
   font-weight: bold;
   padding: 20px;
   border-radius: 20px;
@@ -327,4 +327,17 @@ input
   color: white;
   margin-top: 23px;
   font-family: "Oswald";
+}
+.event-original
+{
+  background-image: url('https://i.annihil.us/u/prod/marvel/i/mg/1/30/53679929d330f/detail.jpg');
+  background-repeat: no-repeat;
+  background-attachment: absolute;
+  background-size: 825px 1252px;
+  background-position: 50% calc(50% + 100px);
+  font-weight: bold;
+  padding: 20px;
+  border-radius: 20px;
+  min-height: 600px;
+  box-shadow: 5px 5px 5px black;
 }
