@@ -10,6 +10,7 @@ import Island from './events/Island.js';
 import AgeOf from "./events/AoU.js";
 import Original from "./events/Original.js";
 import Nemesis from "./events/Nemesis.js";
+import Hunt from "./events/Hunt.js";
 
 export default class EventView extends React.Component
 {
@@ -20,7 +21,7 @@ export default class EventView extends React.Component
             view: -1,
             ticks: 0,
             eventClass: "",
-            events: ["YvZ","AoA","Max","MSSW","Ig","Cw","Sixis","Island","AoU","Original","nemesis"]
+            events: ["YvZ","AoA","Max","MSSW","Ig","Cw","Sixis","Island","AoU","Original","nemesis","hunt"]
         };
         this.shuffle = this.shuffle.bind(this);
     }
@@ -50,7 +51,13 @@ export default class EventView extends React.Component
         if(this.state.view==9)
             eventClass = "event-original";
         if(this.state.view==10)
-            eventClass = "event-nemesis";         
+            eventClass = "event-nemesis";
+        if(this.state.view==11)
+            eventClass = "event-hunt"; 
+        document.addEventListener('keydown',(e)=>{
+           if(e.keyCode == 32)
+              this.shuffle();
+        });   
         this.setState({eventClass: eventClass});    
     }
     shuffle()
@@ -77,7 +84,9 @@ export default class EventView extends React.Component
         if(roll==9)
             eventClass = "event-original";        
         if(roll==10)
-            eventClass = "event-nemesis";            
+            eventClass = "event-nemesis"; 
+        if(roll==11)
+            eventClass = "event-hunt";        
         this.props.spin();    
         this.setState({view: roll, eventClass: eventClass, ticks: this.state.ticks + 1});
     }
@@ -137,10 +146,15 @@ export default class EventView extends React.Component
                              newTeams={this.props.newTeams} 
                              tick={this.state.ticks}
                              shuffle={this.shuffle} /> 
-                      :<Nemesis newCharacters={this.props.newCharacters} 
+                      :this.state.view==10
+                      ? <Nemesis newCharacters={this.props.newCharacters} 
                              newTeams={this.props.newTeams} 
                              tick={this.state.ticks}
-                             shuffle={this.shuffle} />            
+                             shuffle={this.shuffle} />  
+                      : <Hunt newCharacters={this.props.newCharacters} 
+                             newTeams={this.props.newTeams} 
+                             tick={this.state.ticks}
+                             shuffle={this.shuffle} />             
                       }         
 
                 </div>        
